@@ -8,6 +8,7 @@ namespace Pomodoro
     public class ProgramData
     {
         public List<Task> tasks;
+        public Task currentTask = null;
         public int optionPomodoroDuration = 25;     // duration of pomodoro
         public int optionTaskMaxPomodoro = 6;       // maximum number of pomodoro per task
         public int optionShortPauseDuration = 5;    // short pause duration

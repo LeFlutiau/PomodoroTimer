@@ -63,6 +63,11 @@ namespace Pomodoro
 
         private void listTasks_DoubleClick(object sender, EventArgs e)
         {
+            if (this.listTasks.SelectedItems.Count != 0)
+            {
+                data.currentTask = (Task)this.listTasks.SelectedItems[0].Tag;
+                this.Close();
+            }
         }
 
         private void listTasks_SelectedIndexChanged(object sender, EventArgs e)

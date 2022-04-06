@@ -25,8 +25,6 @@ namespace Pomodoro
         private TimerStates timerState;
         private int timerValue;
         private int spent;      // number of tomtatoes spent since started
-        private Task currentTask;
-        private Point _mouseLoc;
         public frmTimer( ProgramData data )
         {
             InitializeComponent();
@@ -36,6 +34,7 @@ namespace Pomodoro
             spent = 0;
             UpdateTimerDisplay();
             timer1.Stop();
+            btnDone.Visible = false;
         }
 
         private void UpdateTimerDisplay()
@@ -52,29 +51,29 @@ namespace Pomodoro
         private void SetTimerToShortPause()
         {
             this.lblTimerValue.ForeColor = Color.Green;
-            this.timerValue = data.optionShortPauseDuration;
+            this.timerValue = data.optionShortPauseDuration * 60;
             UpdateTimerDisplay();
         }
         private void SetTimerToLongPause()
         {
             this.lblTimerValue.ForeColor = Color.Green;
-            this.timerValue = data.optionLongPauseDuration;
+            this.timerValue = data.optionLongPauseDuration * 60;
             UpdateTimerDisplay();
         }
 
         private void SetTimerToTask()
         {
             this.lblTimerValue.ForeColor = Color.Yellow;
-            this.timerValue = data.optionPomodoroDuration;
+            this.timerValue = data.optionPomodoroDuration * 60;
             UpdateTimerDisplay();
         }
 
         private void DisplayTaskAdvance()
         {
             lblCurrentTask.Text =
-                   currentTask.Name + " (" +
-                   currentTask.Elapsed.ToString() + "/" +
-                   currentTask.Planned.ToString() + ")";
+                   data.currentTask.Name + " (" +
+                   data.currentTask.Elapsed.ToString() + "/" +
+                   data.currentTask.Planned.ToString() + ")";
         }
 
         private void btnStopStart_Click(object sender, EventArgs e)
@@ -82,12 +81,10 @@ namespace Pomodoro
             switch( timerState ) {
                 
                 case TimerStates.NoTask:
-                    frmNewTask form;
-                    form = new frmNewTask( data );
+                    frmTaskList form;
+                    form = new frmTaskList( data );
                     form.ShowDialog();
-                    if (form.task.Planned != -1) {
-                        currentTask = form.task;
-                        currentTask.Elapsed = 0;
+                    if (data.currentTask != null) {
                         DisplayTaskAdvance();
                         timerState = TimerStates.Stopped;
                         SetTimerToTask();
@@ -103,10 +100,15 @@ namespace Pomodoro
                     break;
 
                 case TimerStates.TaskRunning:
+                    timerState = TimerStates.Stopped;
+                    btnStopStart.Text = "Start timer";
+                    timer1.Stop();
+                    break;
+
                 case TimerStates.ShortPauseRunning:
                 case TimerStates.LongPauseRunning:
                     timerState = TimerStates.Stopped;
-                    btnStopStart.Text = "Start timer";
+                    btnStopStart.Text = "Stop pause";
                     timer1.Stop();
                     break;
             }
@@ -117,6 +119,13 @@ namespace Pomodoro
             frmTaskList form;
             form = new frmTaskList( data );
             form.ShowDialog();
+            if (data.currentTask != null)
+            {
+                DisplayTaskAdvance();
+                timerState = TimerStates.Stopped;
+                SetTimerToTask();
+                btnStopStart.Text = "Start timer";
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -133,7 +142,7 @@ namespace Pomodoro
                 switch (timerState) {
                     case TimerStates.TaskRunning:
                         spent++;
-                        currentTask.Elapsed++;
+                        data.currentTask.Elapsed++;
 
                         if( spent == data.optionLongPauseAfter )
                         {
@@ -162,21 +171,6 @@ namespace Pomodoro
             frmOptions form;
             form = new frmOptions(data);
             form.ShowDialog();
-        }
-
-        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
-        {
-            _mouseLoc = e.Location;
-        }
-
-        private void menuStrip1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                int dx = e.Location.X - _mouseLoc.X;
-                int dy = e.Location.Y - _mouseLoc.Y;
-                this.Location = new Point(this.Location.X + dx, this.Location.Y + dy);
-            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
