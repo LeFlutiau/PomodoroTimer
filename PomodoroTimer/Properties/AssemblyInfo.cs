@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PomodoroTimer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Timer and task list for the Pomodoro Technique")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CIRB-CIBG")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PomodoroTimer")]
-[assembly: AssemblyCopyright("Copyright © CIRB-CIBG 2022")]
+[assembly: AssemblyCopyright("Copyright © 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

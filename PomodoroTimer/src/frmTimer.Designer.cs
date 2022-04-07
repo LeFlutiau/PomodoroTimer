@@ -83,7 +83,7 @@
             // 
             this.lblCurrentTask.Location = new System.Drawing.Point(8, 120);
             this.lblCurrentTask.Name = "lblCurrentTask";
-            this.lblCurrentTask.Size = new System.Drawing.Size(232, 32);
+            this.lblCurrentTask.Size = new System.Drawing.Size(360, 32);
             this.lblCurrentTask.TabIndex = 3;
             this.lblCurrentTask.Text = "New task (0/0)";
             this.lblCurrentTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
