@@ -153,6 +153,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EAB1BF89CE55448285268F46315342F9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F1154A78877FB3D54E2F2060C7255805"
         "OwnerKey" = "8:_0B5C316049DC4F6AA77BC0438CE7CBEF"
         "MsmSig" = "8:_UNDEFINED"
@@ -552,6 +558,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EAB1BF89CE55448285268F46315342F9"
+            {
+            "SourcePath" = "8:..\\PomodoroTimer\\src\\tomato.ico"
+            "TargetName" = "8:tomato.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_2D9A3CB1233A4BF287DE8DAABEE06A5C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F1154A78877FB3D54E2F2060C7255805"
             {
             "AssemblyRegister" = "3:1"
@@ -671,7 +697,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PomodoroTimer"
         "ProductCode" = "8:{54D6E3BC-A87D-4F3D-B1B1-D47B0FA9553D}"
-        "PackageCode" = "8:{BBAFAC31-84B3-44A4-B84E-BA2F23494549}"
+        "PackageCode" = "8:{AB526A7E-006E-4907-AD46-82AACECC33D8}"
         "UpgradeCode" = "8:{80ECBF84-EE0E-434C-8250-B0A8DEBB60C7}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -791,6 +817,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_26919E12DA87405B853AC6C0D99E52FF"
+            {
+            "Name" = "8:Pomodoro Timer"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_0B5C316049DC4F6AA77BC0438CE7CBEF"
+            "Folder" = "8:_7A9482B802D540A98B5733ADFDB8F315"
+            "WorkingFolder" = "8:_2D9A3CB1233A4BF287DE8DAABEE06A5C"
+            "Icon" = "8:_EAB1BF89CE55448285268F46315342F9"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AE0A64A450FE405C9C01982604716A03"
+            {
+            "Name" = "8:Pomodoro Timer"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_0B5C316049DC4F6AA77BC0438CE7CBEF"
+            "Folder" = "8:_44D0D8701ED945BEA347D1C2AED4665A"
+            "WorkingFolder" = "8:_2D9A3CB1233A4BF287DE8DAABEE06A5C"
+            "Icon" = "8:_EAB1BF89CE55448285268F46315342F9"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {

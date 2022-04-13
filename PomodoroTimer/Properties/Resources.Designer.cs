@@ -59,5 +59,15 @@ namespace Pomodoro.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon tomato {
+            get {
+                object obj = ResourceManager.GetObject("tomato", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

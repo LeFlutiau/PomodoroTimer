@@ -20,26 +20,31 @@ namespace Pomodoro
         private TimerStates timerState;
         private int timerValue;
         private int spent;      // number of tomtatoes spent since started
+        private DateTime timerEnd;
+        
         public frmTimer( ProgramData data )
         {
             InitializeComponent();
             this.data = data;
-            timerValue = 0;
+            timerEnd = DateTime.Now;
             timerState = TimerStates.NoTask;
             spent = 0;
             UpdateTimerDisplay();
             timer1.Stop();
             btnDone.Visible = false;
+            this.Icon = Properties.Resources.tomato;
         }
         private void UpdateTimerDisplay()
         {
             int m;
             int s;
-                
+
+            timerValue = (int)( (timerEnd - DateTime.Now).TotalSeconds );
+
             m = timerValue / 60;
             s = timerValue % 60;
 
-            this.lblTimerValue.Text = m.ToString("00") + ":" + s.ToString("00");
+            lblTimerValue.Text = m.ToString("00") + ":" + s.ToString("00");
         }        
         private void BlinkTimer()
         {
@@ -57,19 +62,19 @@ namespace Pomodoro
         private void SetTimerToShortPause()
         {
             this.lblTimerValue.ForeColor = Color.Green;
-            this.timerValue = data.optionShortPauseDuration * 60;
+            timerEnd = DateTime.Now.AddMinutes(data.optionShortPauseDuration);
             UpdateTimerDisplay();
         }
         private void SetTimerToLongPause()
         {
             this.lblTimerValue.ForeColor = Color.Green;
-            this.timerValue = data.optionLongPauseDuration * 60;
+            timerEnd = DateTime.Now.AddMinutes(data.optionLongPauseDuration);
             UpdateTimerDisplay();
         }
         private void SetTimerToTask()
         {
-            this.lblTimerValue.ForeColor = Color.Yellow;
-            this.timerValue = data.optionPomodoroDuration * 60;
+            lblTimerValue.ForeColor = Color.Yellow;
+            timerEnd = DateTime.Now.AddMinutes( data.optionPomodoroDuration );
             UpdateTimerDisplay();
         }
         private void DisplayTaskAdvance()
@@ -127,12 +132,13 @@ namespace Pomodoro
             frmTaskList form;
             form = new frmTaskList( data );
             form.ShowDialog();
-            if( (data.currentTask != null) && ( timerState == TimerStates.Stopped ) ) 
+            if( (data.currentTask != null) && ( timerState != TimerStates.TaskRunning ) ) 
             {
-                DisplayTaskAdvance();
-                timerState = TimerStates.Stopped;
-                SetTimerToTask();
                 btnStopStart.Text = "Start timer";
+                DisplayTaskAdvance();
+                // timerState = TimerStates.Stopped;
+                SetTimerToTask();
+                // btnStopStart.Text = "Start timer";
             }
         }
         private void timer1_Tick(object sender, EventArgs e)
@@ -143,14 +149,13 @@ namespace Pomodoro
             {
                 lblTimerValue.ForeColor = Color.Red;
             }
-            if (timerValue == 0)
+            if (timerValue <= 0)
             {
                 timer1.Stop();
                 SoundPlayer simpleSound = new SoundPlayer(@".\sounds\alarm.wav");
                 simpleSound.Play();
                 BlinkTimer();
                 timer1.Start();
-                DisplayTaskAdvance();
                 switch (timerState) {
                     case TimerStates.TaskRunning:
                         spent++;
@@ -176,6 +181,7 @@ namespace Pomodoro
                         btnStopStart.Text = "Start timer";
                         break;
                 }
+                DisplayTaskAdvance();
             }
         }
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
